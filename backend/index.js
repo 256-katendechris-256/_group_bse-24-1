@@ -10,17 +10,19 @@ app.post("/authenticate", async (req, res) => {
   const { username } = req.body;
 
   try {
-    const r = await await axios.put(
+    const response = await axios.put(
       'https://api.chatengine.io/users/',
       {username: username, secret: username, first_name: username },
-      { headers: { "private-Key": "b5f2a490-8886-4e6f-964e-8089de2b5203" } }
+      { headers: { "Private-Key": "4dd14d0f-b767-4d5d-b220-f92ec584b879" } }
     );
-    return res.status(r.status).json(r.data);
+    return res.send(response.data);
   } catch (e) {
-    return res.status(e.response.status).json(e.response.data);
+    return res.status(404).json(e.response.data);
   }
   
  
 });
 
-app.listen(3001);
+app.listen(3000, ()=> {
+  console.log('Server is running on http://localhost:3000')
+});

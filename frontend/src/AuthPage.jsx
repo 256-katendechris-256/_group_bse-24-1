@@ -6,11 +6,13 @@ const AuthPage = (props) => {
       const { value } = e.target[0];
 
       axios.post(
-        'http://localhost:3001/authenticate',
+        'http://localhost:3000/authenticate',
         {username: value}
       )
-      .then(r => props.onAuth({ ...r.data, secret: value }))
-      .catch(e => console.log('error', e)) 
+      .then ((res)=>{
+        props.onAuth({ ...res.data, secret: value})
+      })
+      .catch(e => console.log(e)); 
     };
   
     return (
