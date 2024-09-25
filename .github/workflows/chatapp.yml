@@ -29,8 +29,7 @@ jobs:
       # Step 3: Specify the working directory if your package.json is in a subfolder
       # Remove this section if your package.json is in the root directory
       - name: Set working directory
-        working-directory: ./subdirectory-name # Replace with your subdirectory where package.json is located
-
+        working-directory: ./chat
       # Step 4: Cache node_modules to speed up builds
       - name: Cache node_modules
         uses: actions/cache@v3
