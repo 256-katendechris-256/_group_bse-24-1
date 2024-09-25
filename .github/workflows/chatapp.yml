@@ -1,4 +1,4 @@
-name: Chat App
+name: Chat App CI
 
 # Run workflow on push or pull request to main branch
 on:
@@ -11,23 +11,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Setup environment variables for Node.js version
     strategy:
       matrix:
         node-version: [14.x, 16.x]
 
     steps:
-      # Check out the repository code
+      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Node.js environment
+      # Step 2: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Cache `node_modules` to speed up builds
+      # Step 3: Specify the working directory if your package.json is in a subfolder
+      # Remove this section if your package.json is in the root directory
+      - name: Set working directory
+        working-directory: ./subdirectory-name # Replace with your subdirectory where package.json is located
+
+      # Step 4: Cache node_modules to speed up builds
       - name: Cache node_modules
         uses: actions/cache@v3
         with:
@@ -36,18 +40,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Install dependencies
+      # Step 5: Install dependencies
       - name: Install dependencies
+        working-directory: ./chat
         run: npm install
 
-      # Run linting
+      # Step 6: Run linting
       - name: Run ESLint
+        working-directory: ./chat
         run: npm run lint
 
-      # Run unit tests
+      # Step 7: Run unit tests
       - name: Run tests
+        working-directory: ./chat
         run: npm test
 
-      # Build the project
+      # Step 8: Build the project
       - name: Build project
+        working-directory: ./chat
         run: npm run build
