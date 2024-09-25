@@ -1,60 +1,17 @@
-name: Chat App CI
+name: Chat-App-CI
 
-# Run workflow on push or pull request to main branch
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+on: push
 
 jobs:
-  build:
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x]
-
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+    uses: actions/checkout@v2
 
-      # Step 2: Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # Step 3: Specify the working directory if your package.json is in a subfolder
-      # Remove this section if your package.json is in the root directory
-      - name: Set working directory
-        working-directory: ./chat
-      # Step 4: Cache node_modules to speed up builds
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # Step 5: Install dependencies
-      - name: Install dependencies
-        working-directory: ./chat
-        run: npm install
-
-      # Step 6: Run linting
-      - name: Run ESLint
-        working-directory: ./chat
-        run: npm run lint
-
-      # Step 7: Run unit tests
-      - name: Run tests
-        working-directory: ./chat
-        run: npm test
-
-      # Step 8: Build the project
-      - name: Build project
-        working-directory: ./chat
-        run: npm run build
+    -name: run Super-Linter
+    uses: github/super-linter@v4
+    env: 
+      DEFAULT_BRANCH: main
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
