@@ -14,4 +14,9 @@ jobs:
 
       - run: npm install
 
+      # Add permission fix here
+      - name: Set executable permissions
+        run: sudo chmod -R 755 node_modules/react-scripts
+
+      # Build with unsafe perm
       - run: npm run build --unsafe-perm
