@@ -4,7 +4,9 @@
   "description": "uni chat aplication for students",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "start": "react-scripts start",
+    "test": "jest",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "homepage": "https://github.com/256-katendechris-256/GROUP_BSE24-1#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "react-scripts": "^5.0.1"
   }
 }
