@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const express = require("express");
+const cors = require("cors");
+const { default: axios } = require("axios");
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const app = express();
+app.use(express.json());
+app.use(cors({ origin: true }));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+app.post("/authenticate", async (req, res) => {
+  const { username } = req.body;
+
+  try {
+    const response = await axios.put(
+      'https://api.chatengine.io/users/',
+      {username: username, secret: username, first_name: username },
+      { headers: { "Private-Key": "4dd14d0f-b767-4d5d-b220-f92ec584b879" } }
+    );
+    return res.send(response.data);
+  } catch (e) {
+    return res.status(404).json(e.response.data);
+  }
+  
+ 
+});
+
+app.listen(3000, ()=> {
+  console.log('Server is running on http://localhost:3000')
+});
