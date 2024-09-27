@@ -1,0 +1,46 @@
+{
+  "hash": "fba7784b",
+  "configHash": "c6841a1d",
+  "lockfileHash": "8875b37c",
+  "browserHash": "28f68162",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "39b2b0ac",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "1df3727d",
+      "needsInterop": true
+    },
+    "react-chat-engine-pretty": {
+      "src": "../../node_modules/react-chat-engine-pretty/dist/react-chat-engine-pretty.esm.js",
+      "file": "react-chat-engine-pretty.js",
+      "fileHash": "ee579a8b",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "82c8d8b2",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-TNTPHDQH": {
+      "file": "chunk-TNTPHDQH.js"
+    },
+    "chunk-32E4H3EV": {
+      "file": "chunk-32E4H3EV.js"
+    },
+    "chunk-ZAPJZUQJ": {
+      "file": "chunk-ZAPJZUQJ.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}
