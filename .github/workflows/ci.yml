@@ -54,9 +54,15 @@ jobs:
       
       - name: Install dependencies and build
         run: |
-          npm install
-          cd backend && npm install
-          cd ../frontend && npm install && npm run build
+          
+          cd frontend && npm install && npm run build
+          cd ../backend && npm install
+
+      - name: Copy frontend build to  backend
+        run: |
+          mkdir -p backend/public
+          cp -r frontend/dist/backend/public
+           
       
       - name: Deploy to Heroku Production
         uses: akhileshns/heroku-deploy@v3.12.14
