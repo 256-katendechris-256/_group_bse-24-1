@@ -6,7 +6,8 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "jest",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install && npm run build"
   },
   "repository": {
     "type": "git",
