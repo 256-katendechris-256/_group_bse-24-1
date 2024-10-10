@@ -30,7 +30,7 @@ app.post("/authenticate", async (req, res) => {
   }
 });
 
-// Anything that doesn't match the above, send back the index.html file
+// Anything that doesn't match the above, send back the index.html 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
