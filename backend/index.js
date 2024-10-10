@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(cors({ origin: true }));
 
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// Change this line to use the 'public' directory where we'll copy the frontend build
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API routes
 app.post("/authenticate", async (req, res) => {
@@ -31,8 +32,9 @@ app.post("/authenticate", async (req, res) => {
 });
 
 // Anything that doesn't match the above, send back the index.html file
+// Update this line to use the 'public' directory
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
