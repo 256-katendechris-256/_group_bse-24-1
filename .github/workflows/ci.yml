@@ -72,6 +72,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "backend"
           procfile: "web: node index.js"
+          justlogin: true
       
       - name: Copy frontend build to backend
         run: |
