@@ -1,16 +1,20 @@
 import express from "express";
 import cors from "cors";
 import axios from "axios";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: true }));
 
-// Add a route handler for the root path
-app.get('/', (req, res) => {
-  res.send('Welcome to the Chat Application API');
-});
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
+// API routes
 app.post("/authenticate", async (req, res) => {
   const { username } = req.body;
 
@@ -24,6 +28,11 @@ app.post("/authenticate", async (req, res) => {
   } catch (e) {
     return res.status(404).json(e.response.data);
   }
+});
+
+// Anything that doesn't match the above, send back the index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
