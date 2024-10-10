@@ -6,6 +6,11 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: true }));
 
+// Add a route handler for the root path
+app.get('/', (req, res) => {
+  res.send('Welcome to the Chat Application API');
+});
+
 app.post("/authenticate", async (req, res) => {
   const { username } = req.body;
 
@@ -13,7 +18,7 @@ app.post("/authenticate", async (req, res) => {
     const response = await axios.put(
       'https://api.chatengine.io/users/',
       { username: username, secret: username, first_name: username },
-      { headers: { "Private-Key": "fc3c5806-f78f-4bc9-a52f-42f2696d24b7" } }
+      { headers: { "Private-Key": process.env.CHATENGINE_PRIVATE_KEY } }
     );
     return res.send(response.data);
   } catch (e) {
