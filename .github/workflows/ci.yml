@@ -41,6 +41,8 @@ jobs:
       # Add any backend tests here if you have them
   
   deploy_to_production:
+    permissions:
+      contents: write
     needs: build_and_test
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -79,6 +81,8 @@ jobs:
           cp -r frontend/dist backend/public
       
       - name: Commit and push if there are changes
+        env:
+          PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
